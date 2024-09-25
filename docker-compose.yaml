@@ -1,0 +1,41 @@
+# docker-compose.yml
+
+services:
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nginx
+    container_name: "nginx_cont"
+    restart: always
+    volumes:
+#      - static_volume:/app/backend/static
+#      - media_volume:/app/backend/media
+      - etc-letsencrypt:/etc/letsencrypt
+      - www-html:/var/www/html
+    ports:
+      - 80:80
+#      - 443:443
+#    depends_on:
+#      - django_app
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: "certbot_cont"
+    env_file:
+      - .env
+    # remove flag "--staging" to make real SSL (not for tests)
+    command: certonly --webroot --webroot-path=/var/www/html/ --agree-tos --email ${CERTBOT_EMAIL} --no-eff-email -d xn--90aamrcjncbtd.xn--p1ai -d www.xn--90aamrcjncbtd.xn--p1ai
+    volumes:
+      - etc-letsencrypt:/etc/letsencrypt
+      - www-html:/var/www/html
+    depends_on:
+      - nginx
+
+volumes:
+#  static_volume:
+#  media_volume:
+#  my_mysql_volume:
+  www-html:
+  etc-letsencrypt:
