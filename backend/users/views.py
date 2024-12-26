@@ -1,4 +1,3 @@
-from django.shortcuts import render
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -14,6 +13,7 @@ from users.serializers import PasswordResetRequestSerializer, PasswordResetConfi
 from ComboBroker.settings import EMAIL_HOST_USER
 
 # Create your views here.
+
 
 class CustomUserAPIView(APIView):
 

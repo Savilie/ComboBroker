@@ -2,6 +2,31 @@
 
 services:
 
+  db:
+    image: mysql:latest
+    container_name: "db_cont"
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=Danonechik2006
+      - MYSQL_DATABASE=combobroker
+    volumes:
+      - my_mysql_volume:/var/lib/mysql
+
+  django_app:
+    image: backend_app
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: django_cont
+    restart: always
+    env_file:
+      - backend/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
   nginx:
     build:
       context: .
@@ -16,9 +41,9 @@ services:
       - www-html:/var/www/html
     ports:
       - 80:80
-#      - 443:443
-#    depends_on:
-#      - django_app
+      - 443:443
+    depends_on:
+      - django_app
 
   certbot:
     image: certbot/certbot:latest
@@ -26,8 +51,7 @@ services:
     env_file:
       - .env
     # remove flag "--staging" to make real SSL (not for tests)
-    command: certonly --webroot --webroot-path=/var/www/html/ --agree-tos --email ${CERTBOT_EMAIL} --no-eff-email -d xn--90aamrcjncbtd.xn--p1ai -d www.xn--90aamrcjncbtd.xn--p1ai
-    volumes:
+    command: certonly --webroot --webroot-path=/var/www/html/ --agree-tos --emai>    volumes:
       - etc-letsencrypt:/etc/letsencrypt
       - www-html:/var/www/html
     depends_on:
@@ -36,6 +60,6 @@ services:
 volumes:
 #  static_volume:
 #  media_volume:
-#  my_mysql_volume:
+  my_mysql_volume:
   www-html:
   etc-letsencrypt:

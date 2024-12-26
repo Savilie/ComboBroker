@@ -1,3 +1,5 @@
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from rest_framework import serializers
 
 from django.core.mail import send_mail
@@ -8,7 +10,7 @@ from users.models import CustomUser
 
 class CustomUserSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    email = serializers.EmailField(write_only=True)
+    email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
     first_name = serializers.CharField()
     last_name = serializers.CharField()
@@ -26,6 +28,7 @@ class CustomUserSerializer(serializers.Serializer):
                 return user
             else:
                 raise serializers.ValidationError("User with this email already exists and is active.")
+
         except CustomUser.DoesNotExist:
             user = CustomUser.objects.create_user(**validated_data)
             user.is_authenticated = False  # Initially inactive until email is verified
@@ -42,11 +45,16 @@ class CustomUserSerializer(serializers.Serializer):
 
     @staticmethod
     def send_verification_email(user, code):
+        subject = 'Подтверждение Email КомбоБрокер'
+        html_message = render_to_string('email/verification_email.html', {'code': code})  # Используем шаблон
+        plain_message = strip_tags(html_message)  # Текстовая версия для клиентов, не поддерживающих HTML
+
         send_mail(
-            'Подтверждение Email КомбоБрокер',
-            f'Ваш код подтверждения: {code}',
+            subject,
+            plain_message,  # Текстовая версия для спам-фильтров и клиентов без HTML-поддержки
             '',
             [user.email],
+            html_message=html_message,  # HTML-версия
             fail_silently=False,
         )
 

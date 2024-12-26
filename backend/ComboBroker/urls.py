@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from users.views import *
 from external.views import *
+from quiz_feedback.views import *
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 
@@ -28,6 +29,8 @@ urlpatterns = [
     path('api/password-reset/', PasswordResetRequestView.as_view(), name='password_reset'),
     path('api/password-confirm/', PasswordResetConfirmView.as_view(), name='password_confirm'),
     path('api/external/', ExternalAPIDataView.as_view(), name="external_data"),
+    path('api/quiz/', QuizView.as_view(), name='quiz'),
+    path('api/feedback/', FeedbackView.as_view(), name='feedback'),
 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

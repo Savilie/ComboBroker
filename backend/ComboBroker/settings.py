@@ -14,6 +14,7 @@ from django.conf import settings
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
 from datetime import timedelta
+from corsheaders.defaults import default_headers as cors_default_headers
 
 EMAIL_USE_SSL = False
 
@@ -31,7 +32,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.getenv('DEBUG') == 'True' else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv('HOST')]
 
 # EMAIL settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -61,6 +62,9 @@ DEFAULT_APPS = [
 
 THIRD_PARTY_APPS = [
     'users',
+    'quiz_feedback',
+    'rest_framework_simplejwt',
+    'corsheaders',
 
 ]
 
@@ -78,10 +82,37 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'ComboBroker.urls'
 
+# CORS SETTINGS
+
+# development (NOT USE IN PROD)
+CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS_ALLOWED_ORIGINS = [
+#    # real frontend host&port
+#    "http://frontend:5050"
+# ]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "OPTIONS",
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+
+)
+
+CORS_ALLOW_HEADERS = (
+    *cors_default_headers,
+)
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

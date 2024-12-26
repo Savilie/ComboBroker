@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Подтверждение Email КомбоБрокер</title>
+    <title>Заявка на консультацию</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -49,17 +49,16 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Подтверждение Email КомбоБрокер</h1>
+            <h1>Заявка на консультацию</h1>
         </div>
         <div class="content">
-            <p>Ваш код подтверждения:</p>
-            <div class="code">{{ code }}</div>
-            <p>Если вы не запрашивали подтверждение, пожалуйста, проигнорируйте это письмо.</p>
+            <p>Новый заявка на консультацию пользователя:</p>
+            <div class="code">{{ number }} <br>{{ type }} <br>{{ price }} <br>{{ vznos }} <br>{{ program }} <br>{{ city }} <br> </div>
         </div>
         <div class="footer">
             <p>&copy; 2024 КомбоБрокер</p>
         </div>
     </div>
+
 </body>
 </html>
-
