@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка на консультацию</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .header {
+            background-color: #007bff; /* Синий цвет заголовка */
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0; /* Закругленные углы сверху */
+        }
+        .content {
+            padding: 20px;
+        }
+        .code {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            background-color: #e9ecef; /* Светло-серый фон для кода */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+            border-radius: 0 0 5px 5px; /* Закругленные углы снизу */
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Заявка по форме обратной связи</h1>
+        </div>
+        <div class="content">
+            <p>Новая заявка на консультацию пользователя:</p>
+            <div class="code">{{ number }} <br>{{ theme }} <br>{{ messenger }} </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 КомбоБрокер</p>
+        </div>
+    </div>
+</body>
+</html>
