@@ -1,0 +1,134 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+*{
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+}
+@media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
+
+
+  *{
+    margin:0;
+    padding: 0;
+}
+
+body{
+  background-color: #EDF4FF;
+}
+
+.standard-button{
+  width:13vw;
+  height: 53px;
+  border-radius: 5px;
+  border: 0;
+  transition: all 0.3s ease;
+}
+.standard-button p{
+  user-select: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(to right, #448FFF, #7027E7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.standard-button:hover{
+  box-shadow: 0 0 40px #9cd2f1;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+input:focus {
+  outline: none; /* Убираем обводку */
+  border: none; /* Убираем рамку, если она есть */
+}
+
+@media screen and (max-width: 1050px) {
+  .img {
+    display: none;
+  }
+  .subBlock1-container__canWithUs {
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+    background-color: #fff;
+    grid-column: span 2;
+    height: 130px;
+    border-radius: 8px;
+
+  }
+  .subBlock1-container__canWithUs:last-child:nth-child(3n - 1) {
+    grid-column-end: -2;
+  }
+  
+  .subBlock1-container__canWithUs:nth-last-child(2):nth-child(3n + 1) {
+    grid-column-end: 4;
+  }
+
+}
+@media screen and (max-width: 1499px) {
+  
+  .swiper-wrapper {
+    margin-left: 60px;
+  }
+  .swiper-slide {
+    width: 25vw;
+  }
+
+}
+@media screen and (max-width: 1750px) {
+  .canWithUsIcon {
+    width: 40px;
+    height: 40px;
+  }
+  .canWithUsIcon img {
+    width: 20px;
+  }
+  .form-container {
+    background-color: #75a4eb;
+    padding-left: 150px;
+    padding-right: 150px;
+    gap: 50px
+  }
+  .swiper-slide {
+    height:400px;
+}
+.slider-image {
+  user-select: none;
+  height: 14vw;
+}
+}
+@media screen and (max-width: 2400px) and (min-width: 1750px) {
+  .form-container {
+    background-color: #75a4eb;
+    padding-left: 250px;
+    padding-right: 150px;
+  }
+  .canWithUsIcon img {
+    width: 30px;
+  }
+  .img {
+    top: -100px
+  }
+  .swiper-slide {
+    height:400px;
+}
+.slider-image {
+  user-select: none;
+  height: 14vw;
+}
+.canWithUsIcon {
+  width: 50px;
+  height: 50px;
+}
+}
+@media screen and (max-width: 1650px) {
+  .img {
+    top: -50px
+  }
+}

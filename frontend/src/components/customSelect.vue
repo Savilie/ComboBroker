@@ -1,0 +1,108 @@
+<script>
+export default {
+    props: {
+        options: Array,
+    },
+    data() {
+        return {
+            isClicked: false,
+            choosenOne: this.options[0]
+        }
+    },
+    methods: {
+        openSelect() {
+            this.isClicked = !this.isClicked
+        },
+        chooseOption(option) {
+            this.choosenOne = option
+            this.isClicked = !this.isClicked
+        },
+        selectUnfocused() {
+            switch(this.isClicked) {
+                case true:
+
+                this.isClicked = !this.isClicked
+                    break
+
+                case false:
+                    break
+            }
+        }
+    }
+}
+</script>
+
+<template>
+    <div class="select-for-customSelect">
+        <button @click="openSelect" v-click-outside="selectUnfocused">
+            {{ 'Консультация ' + choosenOne }}
+        </button>
+        <ul v-if="this.isClicked">
+            <li @click="chooseOption(option)" v-for="option in this.options"><p>{{ option }}</p></li>
+        </ul>
+    </div>
+</template>
+
+<style scoped>
+.select-for-customSelect {
+    margin-top: 10px;
+    position: relative;
+}
+button::-moz-focus-inner 
+{
+  border: 0;
+}
+button {
+    background-color: #5298FF;
+    width: 25vw;
+    height: 30px;
+    border: 0;
+    padding-bottom: 35px;
+    border-bottom: 2px solid #ffffff;
+    text-align: left;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 300;
+}
+button:hover {
+    cursor: pointer;
+}
+ol {
+  list-style-type:  none;
+}
+
+ul {
+    list-style-type:  none;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    height: 30px;
+    text-align: left;
+    width: 340px;
+}
+p {
+        margin: 0;
+    }
+li:hover {
+    cursor: pointer;
+    background-color: #dadada;
+}
+
+ul {
+    background-color: #fff;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    width: 348px;
+    border: 1px solid #c6dcff;
+}
+</style>
