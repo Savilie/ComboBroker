@@ -44,6 +44,21 @@ export default {
 </template>
 
 <style scoped>
+@media screen and (max-width: 650px) {
+    button {
+        width: 250px;
+    }
+}
+@media screen and (max-width: 1050px) and (min-width: 650px) {
+    button {
+        width: 40vw;
+    }
+}
+@media screen and (max-width: 2400px) and (min-width: 1050px) {
+    button {
+        width: 20vw;
+    }
+}
 .select-for-customSelect {
     margin-top: 10px;
     position: relative;
@@ -54,7 +69,7 @@ button::-moz-focus-inner
 }
 button {
     background-color: #5298FF;
-    width: 25vw;
+
     height: 30px;
     border: 0;
     padding-bottom: 35px;

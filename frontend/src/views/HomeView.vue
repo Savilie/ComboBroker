@@ -22,10 +22,12 @@ const onSlideChange = () => {
 const slidePerView = ref(4)
 
 onMounted(() => {
-  if(window.innerWidth < 1500) {
+  if(window.innerWidth < 1500 && window.innerWidth > 500) {
     slidePerView.value = 3
-  } else {
+  } else if(window.innerWidth < 1800 && window.innerWidth > 1500) {
     slidePerView.value = 4
+  } else {
+    slidePerView.value = 1
   }
 })
 window.addEventListener('resize', () => {
@@ -219,7 +221,7 @@ window.addEventListener('resize', () => {
     </div>
     <div class="form-container">
       <div class="form">
-        <h1>Получить кредитный отчёт</h1>
+        <h1 class="h1">Получить кредитный отчёт</h1>
         <form action="">
           <div class="input-container">
             <input class="form-input" type="text" placeholder="ФИО" />
@@ -401,7 +403,7 @@ window.addEventListener('resize', () => {
   img{
     height:24px;
   }
-  display: flex;
+
   flex-direction: row;
   gap: 10px;
   margin-top: 26px;
@@ -482,7 +484,6 @@ window.addEventListener('resize', () => {
   border-bottom: 2px solid #c6dcff;
   gap: 5px;
   padding: 10px 0 10px 0;
-  width: 25vw;
   h4 {
     font-size: 18px;
   }
@@ -499,7 +500,6 @@ window.addEventListener('resize', () => {
   gap: 70px;
   height: 550px;
   background-color: #5298ff;
-  width: 25vw;
   padding: 40px;
   border-radius: 9px;
   h3 {
@@ -540,7 +540,7 @@ window.addEventListener('resize', () => {
 
 .programm-percent {
   p {
-    font-size: 32px;
+    font-size: clamp(1.125rem, 0.104rem + 4.667vw, 2rem);
     color: #484848;
   }
 }
@@ -565,17 +565,17 @@ window.addEventListener('resize', () => {
   align-items: center;
   gap: 10px;
   justify-content: space-between;
-  width: 33vw;
 }
 .programm {
   padding-left: 15px;
   display: flex;
 }
 .programm-container {
+  width: 100%;
   align-items: center;
   display: flex;
   flex-direction: row;
-  gap: 50px;
+
 }
 .programm-image-container {
   display: flex;
@@ -636,12 +636,13 @@ gap: 20px
   }
 }
 .blue-button {
-  width: 13vw;
   height: 53px;
   border-radius: 5px;
   border: 0;
   transition: all 0.3s ease;
   background-color: #458ffc;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .blue-button:hover {
   background-color: #5f9fff;
@@ -661,24 +662,12 @@ gap: 20px
   flex-direction: column;
   gap: 30px;
   h2 {
-    width: 41vw;
-    font-size: 30px;
     span {
       color: #458ffc;
     }
   }
 }
 
-.block4-container {
-  margin-left: 150px;
-  margin-right: 150px;
-  width: 85vw;
-  margin-top: 150px;
-  display: flex;
-  justify-content: space-between;
-
-  gap: 33px;
-}
 
 .block4 {
   display: flex;
@@ -711,7 +700,6 @@ gap: 20px
   }
 }
 .stops {
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 20px;
@@ -741,13 +729,12 @@ gap: 20px
   height: 400px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 
   .stops {
     width: 800px;
   }
   .form {
-    width: 500px;
+
     button {
       width: 100%;
       height: 50px;
@@ -806,63 +793,17 @@ gap: 20px
   width: 100%;
 }
 .block2-header {
-  font-size: 40px;
-  width: 500px;
   background: linear-gradient(to right, #1974fd, #6616e7);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.whatWeGuaranteeBlock {
-  img {
-    width: 17.5vw;
-    border-radius: 20px;
-    border: 1px solid black;
-  }
-}
-.OurGuarantee {
-  background-color: #ffffff00;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 17.5vw;
-  height: 10.5vw;
-  border-radius: 20px;
-  border: 1px solid #000000;
-  padding: 1.2vw;
-  box-shadow: 0px 4px 3.1px 1px #bcd3f99a;
-  h2 {
-    color: #fff;
-  }
-}
-.whatWeGuarantee {
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: repeat(auto-fit, 1fr);
-}
-.whatWeGuaranteeBlock:nth-child(2n) {
-  margin-top: 20px;
-}
-.whatWeGuaranteeBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  img {
-    width: 20vw;
-    box-shadow: 0px 4px 3.1px 1px #bcd3f99a;
-  }
-  h2 {
-    font-size: clamp(0.625rem, 0.179rem + 0.714vw, 1.25rem);
-    color: #20262e;
-  }
-  h3 {
-    font-size: clamp(0.625rem, 0.179rem + 0.714vw, 1.25rem);
-    font-weight: normal;
-  }
-}
+
+
+
 .block2 {
   position: relative;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: 50px;
   height: 100%;
   margin-top: 120px;
@@ -892,25 +833,11 @@ gap: 20px
   flex-direction: column;
   gap: 30px;
   padding: 20px;
-  width:11vw;
+
   background-color: #fff;
-  height: 130px;
   border-radius: 8px;
   h2 {
     font-size: clamp(0.75rem, 0.596rem + 0.353vw, 1.125rem);
-  }
-}
-.subBlock1 {
-  gap: 40px;
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: #fff;
-  h1 {
-    font-weight: 400;
-    font-size: clamp(1.375rem, 0.929rem + 1.19vw, 2rem);
   }
 }
 .swiper {
@@ -948,13 +875,11 @@ gap: 20px
   font-size: clamp(1.875rem, 1.591rem + 0.758vw, 2.5rem);
   font-weight: 700;
   line-height: 1.2;
-  width: 43vw;
   color: white;
 }
 .Help_in_obligation_p {
-  font-size: clamp(0.625rem, 0.341rem + 0.758vw, 1.25rem);
+  font-size: 16px;
   font-weight: 300;
-  width: 530px;
   color: white;
 }
 .block1-container {

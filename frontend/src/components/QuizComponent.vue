@@ -242,14 +242,58 @@ input:focus {
   border-radius: 8px;
   gap: 5px;
   padding: 10px;
-  width: 20vw;
+
 }
 h4 {
   font-size: 16px;
   color: #5298ff;
 }
+@media screen and (max-width: 2000px) and (min-width: 1050px) {
+  .quiz {
+    width: 60vw;
+  }
+  .question {
+    width: 50vw;
+  }
+  .masked-input {
+    width: 20vw;
+  }
+  .number {
+    width: 20vw;
+  }
+}
+@media screen and (max-width: 1050px) and (min-width: 650px) {
+  .quiz {
+    width: 80vw;
+  }
+  .question {
+    width: 70vw;
+  }
+  .masked-input {
+    width:230px;
+  }
+  .number {
+    width: 250px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .quiz {
+    width: 90vw;
+    padding-right: 5px;
+  }
+  .question {
+    width: 80vw;
+  }
+  .masked-input {
+    width:200px;
+  }
+  .number {
+    width: 250px;
+  }
+}
+
 .masked-input {
-  width: 20vw;
+
   border: 0;
   padding: 0;
   margin: 0;
@@ -280,13 +324,13 @@ input::-webkit-calendar-picker-indicator {
   display: none;
 }
 .quiz {
-  padding-left: 60px;
-  padding-right: 60px;
+  margin-top: 100px;
+
   padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60vw;
+
   padding-bottom: 40px;
   background-color: #ffffff;
   border: 1px solid #c8ddff;
@@ -339,7 +383,6 @@ input::-webkit-calendar-picker-indicator {
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 7px;
-  width: 50vw;
 }
 .active {
   box-shadow: 0px 3px 10px 1px #4189fd;

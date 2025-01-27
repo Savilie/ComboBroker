@@ -42,6 +42,16 @@ export default {
   </div>
 </template>
 <style lang="scss">
+@media screen and (max-width: 1050px) and (min-width: 650px) {
+    .radio-button {
+        width: 20vw;
+    }
+  }
+  @media screen and (max-width: 650px){
+    .radio-button {
+        width: 230px;
+    }
+}
 .stick {
     border: 1px #fff;
     height: 40px;
@@ -80,7 +90,6 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 11.5vw;
   gap: 10px;
 }
 .radio-button:hover {
