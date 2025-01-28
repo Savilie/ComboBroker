@@ -10,12 +10,12 @@ COPY nginx/nginx.conf /etc/nginx/conf.d
 
 COPY nginx/proxy_params /etc/nginx
 
-COPY index.html .
+# COPY index.html .
 
-#RUN apt-get update && apt-get install -y npm
+RUN apt-get update && apt-get install -y npm
 
-# copy frontend folder
+COPY frontend .
 
-# RUN npm install 
+RUN npm install 
 
-# RUN npm run build
+RUN npm run build
