@@ -1,10 +1,13 @@
 <script>
-export default {
+import {useFeedbackStore} from '../stores/counter.js'
+
+export default{
     props: {
         options: Array,
     },
     data() {
         return {
+            store: useFeedbackStore(),
             isClicked: false,
             choosenOne: this.options[0]
         }
@@ -16,6 +19,8 @@ export default {
         chooseOption(option) {
             this.choosenOne = option
             this.isClicked = !this.isClicked
+            this.store.theme = 'Консультация ' + option
+            console.log(this.store.theme)
         },
         selectUnfocused() {
             switch(this.isClicked) {
@@ -111,6 +116,7 @@ ul {
     position: absolute;
     display: flex;
     flex-direction: column;
+    z-index: 23465;
     border-radius: 3px;
     padding-left: 0;
     padding-right: 0;
@@ -118,6 +124,5 @@ ul {
     padding-bottom: 5px;
     margin-top: 5px;
     width: 348px;
-    border: 1px solid #c6dcff;
 }
 </style>

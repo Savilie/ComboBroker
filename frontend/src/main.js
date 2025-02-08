@@ -1,7 +1,10 @@
 import './assets/main.css'
+import 'vue-final-modal/style.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { createVfm } from 'vue-final-modal'
+import { useFeedbackStore } from './stores/counter'
 
 import App from './App.vue'
 import router from './router'
@@ -20,9 +23,20 @@ const clickOutside = {
   },};
 
 const app = createApp(App)
-
+const vfm = createVfm()
 app.use(createPinia())
 app.use(router)
 
-app.mount('#app')
+app.use(vfm).mount('#app')
 app.directive("click-outside", clickOutside)
+
+const store = useFeedbackStore()
+
+export function changeNumber(number) {
+    if (number.length < 15) {
+    store.number = ''
+  } else {
+    store.number = '+7' + number
+    console.log(store.number)
+  }
+}

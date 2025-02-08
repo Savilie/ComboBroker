@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import MaskInputComponent from '../../node_modules/my-mask-library/src/MaskInput.vue'
+import axios from 'axios'
 const maskedValue = ref('')
 const questions = ref([
   {
@@ -101,6 +102,7 @@ function addNumber() {
     console.log(result.value)
     document.querySelector('.number').style.transitionDuration = '0.2s'
     document.querySelector('.number').style.border = '1px solid #00FF26'
+    axios.post('https://xn--90aamrcjncbtd.xn--p1ai/api/quiz/', {number: result.value[5], type: result.value[0], price: Number(result.value[1]), vznos: Number(result.value[2]), program: result.value[3], city: result.value[4]}).then(response => console.log(response)).catch(error => console.log(error))
   }
 }
 </script>
@@ -146,9 +148,9 @@ function addNumber() {
     <div class="questions" style="overflow: hidden" v-else>
       <input class="number-input" type="text" placeholder="Введите город" v-model="currentQuestion.city" />
     </div>
-    <div class="question" style="background-color: #5298ff; color: #fff" @click="nextQuestion">
+    <button class="question" style="background-color: #5298ff; color: #fff" @click="nextQuestion">
       Следующий вопрос
-    </div>
+    </button>
   </div>
 
   <div class="quiz" v-if="isQuizEnded">

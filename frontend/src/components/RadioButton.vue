@@ -1,7 +1,9 @@
 <script>
+import { useFeedbackStore } from '@/stores/counter.js';
 export default {
   data() {
     return {
+      store: useFeedbackStore(),
       option: 'WhatsApp',
     }
   },
@@ -9,6 +11,8 @@ export default {
     changeOption(messanger) {
       if (this.option !== messanger) {
         this.option = messanger
+        this.store.preferedMessanger = this.option
+        console.log(this.store.preferedMessanger)
       }
     },
   },
@@ -48,13 +52,20 @@ export default {
     }
   }
   @media screen and (max-width: 650px){
+    .connect {
+      flex-direction: column;
+    }
     .radio-button {
         width: 230px;
+    }
+    .stick {
+      height: 1px;
+      width: 55vw;
     }
 }
 .stick {
     border: 1px #fff;
-    height: 40px;
+
     border-style: dashed;
     stroke-dasharray: 10 5;
 }
@@ -81,7 +92,6 @@ export default {
 .connect {
     margin-top: 10px;
   display: flex;
-  flex-direction: row;
   gap: 20px;
 }
 .radio-button {

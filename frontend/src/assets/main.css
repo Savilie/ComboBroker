@@ -49,6 +49,9 @@ input:focus {
 }
 
 @media screen and (max-width: 650px) {
+  .contacts-and-brand {
+    padding-left: 15px;
+  }
   .form-container button {
     padding-left: 10px;
     padding-right: 10px;
@@ -72,6 +75,7 @@ input:focus {
   }
   .form-container-end {
     width: 70vw;
+
   }
   .form-container {
     margin-top: 50px;
@@ -220,6 +224,9 @@ input:focus {
 }
 
 @media screen and (max-width: 1050px) and (min-width: 650px) {
+  .contacts-and-brand {
+    padding-left: 75px;
+  }
   .programm-container {
     gap: 50px;
   }
@@ -392,6 +399,12 @@ input:focus {
 
 }
 @media screen and (max-width: 1750px) and (min-width: 1050px) {
+  .stock-block5 {
+    width: 40vw;
+  }
+  .contacts-and-brand {
+    padding-left: 100px;
+  }
   .subBlock1-container__canWithUs {
     width: 11vw;
     height: 130px;
@@ -508,6 +521,9 @@ input:focus {
 }
 }
 @media screen and (max-width: 2400px) and (min-width: 1750px) {
+  .contacts-and-brand {
+    padding-left: 150px;
+  }
   .programm-container {
     gap: 50px;
   }
@@ -631,4 +647,127 @@ input:focus {
   .img {
     top: -50px
   }
+}
+@media screen and (min-width: 2000px) {
+  .contacts-and-brand {
+    padding-left: 150px;
+  }
+  .programm-container {
+    gap: 50px;
+  }
+  .tgchannel {
+    display: flex;
+  }
+  .subBlock1-container__canWithUs {
+    width: 11vw;
+    height: 130px;
+  }
+  .subBlock1 {
+    gap: 40px;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    h1 {
+      font-weight: 400;
+      font-size: clamp(1.375rem, 0.929rem + 1.19vw, 2rem);
+    }
+  }
+  .number-form {
+    width: 20vw;
+  }
+  .form-container-end {
+    width: 25vw;
+  }
+  .programm-text {
+    width: 33vw;
+  }
+  .Help_in_obligation {
+    width: 43vw;
+  }
+  .OurGuarantee {
+    background-color: #ffffff00;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 17.5vw;
+    height: 10.5vw;
+    border-radius: 20px;
+
+    padding: 1.2vw;
+    box-shadow: 0px 4px 3.1px 1px #bcd3f99a;
+  
+  }
+  .whatWeGuaranteeBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .whatWeGuaranteeBlock img {
+    width: 20vw;
+    box-shadow: 0px 4px 3.1px 1px #bcd3f99a;
+    border-radius:20px;
+  }
+  .whatWeGuaranteeBlock h2 {
+    font-size: clamp(0.625rem, 0.179rem + 0.714vw, 1.25rem);
+    color: #20262e;
+  }
+  .whatWeGuaranteeBlock h3 {
+    font-size: clamp(0.625rem, 0.179rem + 0.714vw, 1.25rem);
+    font-weight: normal;
+  }
+  .whatWeGuarantee {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fit, 1fr);
+  }
+  .whatWeGuaranteeBlock:nth-child(2n) {
+    margin-top: 20px;
+  }
+  .stop-factors {
+    width: 41vw;
+    font-size: 30px;
+  }
+  .block4-container {
+    margin-left: 150px;
+    margin-right: 150px;
+    width: 85vw;
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+  
+    gap: 33px;
+  }
+  .block
+  .Help_in_obligation_p {
+    width: 530px;
+  }
+  .stops {
+    display: flex;
+  }
+  .form-container {
+    background-color: #75a4eb;
+    padding-left: 250px;
+    padding-right: 150px;
+    justify-content: space-between;
+  }
+  .canWithUsIcon img {
+    width: 30px;
+  }
+  .img {
+    top: -150px
+  }
+  .swiper-slide {
+    height:400px;
+}
+.slider-image {
+  user-select: none;
+  height: 14vw;
+}
+.canWithUsIcon {
+  width: 50px;
+  height: 50px;
+}
 }

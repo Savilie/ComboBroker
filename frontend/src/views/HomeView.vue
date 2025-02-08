@@ -7,9 +7,21 @@ import radioButton from '@/components/RadioButton.vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref, onMounted } from 'vue'
-
+import { ModalsContainer, useModal } from 'vue-final-modal'
+import feedbackModal from '@/components/feedbackModal.vue'
 // Import Swiper styles
 import 'swiper/css'
+import { useFeedbackStore } from '@/stores/counter'
+import {changeNumber} from "@/main.js"
+const store = useFeedbackStore()
+
+const { open, close } = useModal({
+  
+  component: feedbackModal,
+    attrs: {
+      title: 'Получить консультацию',
+    },
+  })
 
 const maskedValue = ref('')
 
@@ -22,21 +34,39 @@ const onSlideChange = () => {
 const slidePerView = ref(4)
 
 onMounted(() => {
-  if(window.innerWidth < 1500 && window.innerWidth > 500) {
-    slidePerView.value = 3
-  } else if(window.innerWidth < 1800 && window.innerWidth > 1500) {
+  if(window.innerWidth < 700 && window.innerWidth > 300) {
+    slidePerView.value = 1
+  } else if(window.innerWidth < 10000 && window.innerWidth > 1500) {
     slidePerView.value = 4
   } else {
-    slidePerView.value = 1
+    slidePerView.value = 3
   }
 })
 window.addEventListener('resize', () => {
-  if(window.innerWidth < 1500) {
-    slidePerView.value = 3
-  } else {
+  if(window.innerWidth < 700 && window.innerWidth > 300) {
+    slidePerView.value = 1
+  } else if(window.innerWidth < 10000 && window.innerWidth > 1500) {
     slidePerView.value = 4
+  } else {
+    slidePerView.value = 3
   }
-} )
+})
+function POSTrequest() {
+    store.request()
+    console.log(store.number, store.theme, store.preferedMessanger)
+}
+// function changeNumber() {
+//     if (maskedValue.value.length < 15) {
+//     store.number = ''
+//     document.querySelector('.masked-input').style.transitionDuration = '0.2s'
+//     document.querySelector('.masked-input').style.border = '1px solid #FF0000'
+//   } else {
+//     store.number = '+7' + maskedValue.value
+//     document.querySelector('.masked-input').style.transitionDuration = '0.2s'
+//     document.querySelector('.masked-input').style.border = '1px solid #00FF26'
+//   }
+//     console.log(store.number)
+// }
 </script>
 
 <template>
@@ -57,7 +87,8 @@ window.addEventListener('resize', () => {
                 Помогли одобрить и получить более 200 000 000 руб. за последний год
               </p>
 
-              <button class="standard-button"><p>Получить консультацию</p></button>
+              <button @click="open" class="standard-button"><p>Получить консультацию</p></button>
+              <ModalsContainer />
             </div>
             <div class="img">
               <img
@@ -136,7 +167,7 @@ window.addEventListener('resize', () => {
                 <div class="canWithUsIcon">
                   <img src="../../public/Phone_Icon.png" alt="" />
                 </div>
-                <h2>Получить консультацию по получению ипотеки</h2>
+                <h2>Получить консультацию по одобрению ипотеки</h2>
               </div>
               <div class="subBlock1-container__canWithUs">
                 <div class="canWithUsIcon">
@@ -155,12 +186,6 @@ window.addEventListener('resize', () => {
                   <img src="../../public/Board_Icon.png" alt="" />
                 </div>
                 <h2>Сделать анализ кредитной истории</h2>
-              </div>
-              <div class="subBlock1-container__canWithUs">
-                <div class="canWithUsIcon">
-                  <img src="../../public/Home_Icon.png" alt="" />
-                </div>
-                <h2>Запросить отчет ЕГРН онлайн</h2>
               </div>
             </div>
           </div>
@@ -215,7 +240,7 @@ window.addEventListener('resize', () => {
             Пусть мечта о новом доме станет доступной целью,
             <span class="h1">а КомбоБрокер поможет вам в её достижении!</span>
           </h2>
-          <button class="standard-button"><p>Получить консультацию</p></button>
+          <button @click="open" class="standard-button"><p>Получить консультацию</p></button>
         </div>
       </div>
     </div>
@@ -258,7 +283,7 @@ window.addEventListener('resize', () => {
             Проверить себя или заемщика перед самостоятельной подачей заявки на
             <span>стоп факторы</span>
           </h2>
-          <button class="blue-button">
+          <button @click="open" class="blue-button">
             <p>Узнать стоп-факторы</p>
           </button>
         </div>
@@ -285,7 +310,7 @@ window.addEventListener('resize', () => {
                     <h3>Семейная ипотека</h3>
                     <p>Ребёнок до 6 лет, или<br />Два несовершеннолетних ребёнка</p>
                   </div>
-                  <div class="programm-percent"><p>6%</p></div>
+                  <div class="programm-percent">от<p>6%</p></div>
                 </div>
               </div>
             </div>
@@ -299,7 +324,7 @@ window.addEventListener('resize', () => {
                     <h3>Сельская ипотека</h3>
                     <p>Официальный доход<br />Стаж от трёх месяцев на текущем месте работы</p>
                   </div>
-                  <div class="programm-percent"><p>3%</p></div>
+                  <div class="programm-percent">от<p>3%</p></div>
                 </div>
               </div>
             </div>
@@ -313,7 +338,7 @@ window.addEventListener('resize', () => {
                     <h3>IT ипотека</h3>
                     <p>Работникам it-компании<br />Стаж >= 2 года</p>
                   </div>
-                  <div class="programm-percent"><p>6%</p></div>
+                  <div class="programm-percent">от<p>6%</p></div>
                 </div>
               </div>
             </div>
@@ -327,13 +352,13 @@ window.addEventListener('resize', () => {
                     <h3>Базовая ипотека</h3>
                     <p>Нет стоп-факторов</p>
                   </div>
-                  <div class="programm-percent"><p>15%</p></div>
+                  <div class="programm-percent">от<p>15%</p></div>
                 </div>
               </div>
             </div>
-            <div class="programm-button">
+            <button style="border: 0" @click="open" class="programm-button">
               <h2>Узнать какая подходит вам</h2>
-            </div>
+            </button>
           </div>
         </div>
       </div>
@@ -350,6 +375,7 @@ window.addEventListener('resize', () => {
             <div class="number-form">
               <h4 style="color: #fff; font-weight: normal">+7</h4>
               <MaskInputComponent
+                @change="changeNumber(maskedValue)"
                 style="color: #fff; font-weight: normal; font-size: 18px"
                 v-model="maskedValue"
                 mask="(###) ###-##-##"
@@ -366,7 +392,7 @@ window.addEventListener('resize', () => {
             <h3>Где вам удобнее общаться?</h3>
             <radioButton />
           </div>
-          <button id="form-button">Оставить заявку</button>
+          <button id="form-button" @click="POSTrequest">Оставить заявку</button>
         </div>
       </div>
     </div>
@@ -395,6 +421,12 @@ window.addEventListener('resize', () => {
 </template>
 
 <style lang="scss">
+.programm-percent {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
 .tgchannel {
   height: 40px;
   p {
@@ -416,7 +448,7 @@ window.addEventListener('resize', () => {
   flex-direction: column;
   justify-content: center;
   gap: 17px;
-  padding-left: 150px;
+
   .contacts {
     display: flex;
     flex-direction: column;
@@ -498,7 +530,7 @@ window.addEventListener('resize', () => {
   display: flex;
   flex-direction: column;
   gap: 70px;
-  height: 550px;
+
   background-color: #5298ff;
   padding: 40px;
   border-radius: 9px;
@@ -589,7 +621,6 @@ window.addEventListener('resize', () => {
 .stock-block5 {
   box-shadow: 0 3px 7px 1px #458efc28;
   object-fit: cover;
-  width: 40vw;
   border-radius: 10px;
 
 }
@@ -777,7 +808,7 @@ gap: 20px
   height: 900px; /* Высота, аналогичная высоте SVG */
   background-color: #75a4eb; /* Цвет заливки */
   clip-path: path(
-    'M65.3849 765.012C106.859 678.436 187.706 617.317 282.31 601.019V601.019C348.164 589.674 408.25 556.402 452.812 506.605L530.412 419.889C543.445 405.325 557.75 391.953 573.158 379.931V379.931C690.129 288.665 831.37 233.84 979.282 222.286L1172.61 207.186C1216.26 203.776 1258.49 190.15 1295.9 167.408L1391.82 109.101C1507.13 39.0011 1639.23 1.32002 1774.17 0.0317864L1777.5 0H1920V901.5H0L65.3849 765.012Z'
+    'M65.3849 765.012C106.859 678.436 187.706 617.317 282.31 601.019V601.019C348.164 589.674 408.25 556.402 452.812 506.605L530.412 419.889C543.445 405.325 557.75 391.953 573.158 379.931V379.931C690.129 288.665 831.37 233.84 979.282 222.286L1172.61 207.186C1216.26 203.776 1258.49 190.15 1295.9 167.408L1391.82 109.101C1507.13 39.0011 1639.23 1.32002 1774.17 0.0317864L1777.5 0H1920L3504.5 2V903.5L1920 901.5H0L65.3849 765.012Z'
   );
 }
 
@@ -853,7 +884,7 @@ gap: 20px
   user-select: none;
   right: 2vw;
   position: absolute;
-  z-index: 12423;
+  z-index: 455;
   img {
     width: 35vw;
   }

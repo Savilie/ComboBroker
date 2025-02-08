@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -14,6 +15,69 @@ from ComboBroker.settings import EMAIL_HOST_USER
 class QuizView(APIView):
 
     @staticmethod
+    @extend_schema(
+        description=f"""Accepts JSON with fields: number (phone number), type (property type), price (price),
+            vznos (down payment), program (program), city (city).
+            Sends a letter to the specified email with the data from the request.""",
+        request={
+            'application/json': {
+            'schema': QuizSerializer.Meta.fields,
+            'example': {
+                "number": "+79001234567",
+                "type": "Квартира",
+                "price": 5000000,
+                "vznos": 1000000,
+                "program": "Семейная ипотека",
+                "city": "Москва"
+                }
+            }
+        },
+        responses={
+            200: {
+                'description': "Заявка успешно отправлена. Email отправлен.",
+                'content': {
+                    'application/json': {
+                        'schema': {
+                            'type': 'object',
+                            'properties': {
+                                'message': {'type': 'string', 'description': 'Сообщение об успехе'}
+                                },
+                             'example': {
+                                'message': "Заявка успешно отправлена."
+                                    }
+                        }
+                    }
+                }
+            },
+            400: {
+                'description': 'Validating data error. Check entered data.',
+                'content': {
+                    'application/json': {
+                        'schema': {
+                            'type': 'object',
+                            'properties': {
+                                'error': {'type': 'object', 'description': 'Data has invalid data.'}
+                            }
+                        }
+                    }
+                }
+            },
+            500: {
+                'description': 'Server error when sending an email. Please try again later.',
+                 'content': {
+                    'application/json': {
+                        'schema': {
+                            'type': 'object',
+                            'properties': {
+                                'error': {'type': 'string', 'description': 'Description of server errors'}
+                             }
+                         }
+                     }
+                }
+             }
+
+        },
+    )
     def post(request):
         serializer = QuizSerializer(data=request.data)
         if serializer.is_valid():
