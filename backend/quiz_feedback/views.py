@@ -9,6 +9,8 @@ from django.utils.html import strip_tags
 from django.core.mail import send_mail
 
 from ComboBroker.settings import EMAIL_HOST_USER
+
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiTypes, OpenApiExample, OpenApiResponse
 # Create your views here.
 
 
@@ -16,67 +18,53 @@ class QuizView(APIView):
 
     @staticmethod
     @extend_schema(
-        description=f"""Accepts JSON with fields: number (phone number), type (property type), price (price),
-            vznos (down payment), program (program), city (city).
-            Sends a letter to the specified email with the data from the request.""",
-        request={
+        description="""Accepts JSON with fields: number (phone number), type (property type), price (price),
+        vznos (down payment), program (program), city (city).
+        Sends a letter to the specified email with the data from the request.""",
+    request={
             'application/json': {
-            'schema': QuizSerializer.Meta.fields,
-            'example': {
-                "number": "+79001234567",
-                "type": "Квартира",
-                "price": 5000000,
-                "vznos": 1000000,
-                "program": "Семейная ипотека",
-                "city": "Москва"
-                }
+                'schema': {
+                  'type': 'object',
+                  'properties': {
+                      'number': {'type': 'string', 'description': 'Номер телефона'},
+                      'type': {'type': 'string', 'description': 'Тип недвижимости'},
+                      'price': {'type': 'integer', 'description': 'Цена'},
+                      'vznos': {'type': 'integer', 'description': 'Первоначальный взнос'},
+                      'program': {'type': 'string', 'description': 'Программа'},
+                      'city': {'type': 'string', 'description': 'Город'}
+                   },
+                  'required': ['number', 'type', 'price', 'vznos', 'program', 'city']
+                },
+                'example': {
+                  "number": "+79001234567",
+                  "type": "Квартира",
+                  "price": 5000000,
+                  "vznos": 1000000,
+                  "program": "Семейная ипотека",
+                  "city": "Москва"
+                  }
             }
         },
-        responses={
-            200: {
-                'description': "Заявка успешно отправлена. Email отправлен.",
-                'content': {
-                    'application/json': {
-                        'schema': {
-                            'type': 'object',
-                            'properties': {
-                                'message': {'type': 'string', 'description': 'Сообщение об успехе'}
-                                },
-                             'example': {
-                                'message': "Заявка успешно отправлена."
-                                    }
-                        }
+    responses={
+        200: OpenApiResponse(
+            description="Заявка успешно отправлена. Email отправлен.",
+            response=QuizSerializer,
+            examples=[
+                OpenApiExample(
+                    'Success Response Example',
+                    value={
+                        "number": "+79001234567",
+                        "type": "Квартира",
+                        "price": 5000000,
+                        "vznos": 1000000,
+                        "program": "Семейная ипотека",
+                        "city": "Москва"
                     }
-                }
-            },
-            400: {
-                'description': 'Validating data error. Check entered data.',
-                'content': {
-                    'application/json': {
-                        'schema': {
-                            'type': 'object',
-                            'properties': {
-                                'error': {'type': 'object', 'description': 'Data has invalid data.'}
-                            }
-                        }
-                    }
-                }
-            },
-            500: {
-                'description': 'Server error when sending an email. Please try again later.',
-                 'content': {
-                    'application/json': {
-                        'schema': {
-                            'type': 'object',
-                            'properties': {
-                                'error': {'type': 'string', 'description': 'Description of server errors'}
-                             }
-                         }
-                     }
-                }
-             }
+                )
+             ]
+        )
+    },
 
-        },
     )
     def post(request):
         serializer = QuizSerializer(data=request.data)
@@ -120,9 +108,32 @@ class QuizView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
 class FeedbackView(APIView):
 
     @staticmethod
+    @extend_schema(
+        description="""Accepts JSON with fields: number (phone number), theme (question theme), messenger (preferred messenger).
+        Sends a letter to the specified email with the data from the request.""",
+    request={
+            'application/json': {
+                'schema': {
+                  'type': 'object',
+                  'properties': {
+                      'number': {'type': 'string', 'description': 'Номер телефона'},
+                      'theme': {'type': 'string', 'description': 'Тема вопроса'},
+                      'messenger': {'type': 'string', 'description': 'Предпочтительный мессенджер'}
+                   },
+                  'required': ['number', 'theme', 'messenger']
+                },
+                'example': {
+                  "number": "+79001234567",
+                  "theme": "Хочу получить кредит, но не знаю как",
+                  "messenger": "Telegram"
+                  }
+            }
+        }
+    )
     def post(request):
         serializer = FeedbackSerializer(data=request.data)
         if serializer.is_valid():
