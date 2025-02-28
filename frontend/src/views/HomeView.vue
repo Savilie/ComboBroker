@@ -11,17 +11,16 @@ import { ModalsContainer, useModal } from 'vue-final-modal'
 import feedbackModal from '@/components/feedbackModal.vue'
 // Import Swiper styles
 import 'swiper/css'
-import { useFeedbackStore } from '@/stores/counter'
-import {changeNumber} from "@/main.js"
+import { useFeedbackStore } from '@/stores/form'
+import { changeNumber } from '@/main.js'
 const store = useFeedbackStore()
 
-const { open, close } = useModal({
-  
+const { open } = useModal({
   component: feedbackModal,
-    attrs: {
-      title: 'Получить консультацию',
-    },
-  })
+  attrs: {
+    title: 'Получить консультацию',
+  },
+})
 
 const maskedValue = ref('')
 
@@ -34,39 +33,27 @@ const onSlideChange = () => {
 const slidePerView = ref(4)
 
 onMounted(() => {
-  if(window.innerWidth < 700 && window.innerWidth > 300) {
+  if (window.innerWidth < 700 && window.innerWidth > 300) {
     slidePerView.value = 1
-  } else if(window.innerWidth < 10000 && window.innerWidth > 1500) {
+  } else if (window.innerWidth < 10000 && window.innerWidth > 1500) {
     slidePerView.value = 4
   } else {
     slidePerView.value = 3
   }
 })
 window.addEventListener('resize', () => {
-  if(window.innerWidth < 700 && window.innerWidth > 300) {
+  if (window.innerWidth < 700 && window.innerWidth > 300) {
     slidePerView.value = 1
-  } else if(window.innerWidth < 10000 && window.innerWidth > 1500) {
+  } else if (window.innerWidth < 10000 && window.innerWidth > 1500) {
     slidePerView.value = 4
   } else {
     slidePerView.value = 3
   }
 })
 function POSTrequest() {
-    store.request()
-    console.log(store.number, store.theme, store.preferedMessanger)
+  store.request()
+  console.log(store.number, store.theme, store.preferedMessanger)
 }
-// function changeNumber() {
-//     if (maskedValue.value.length < 15) {
-//     store.number = ''
-//     document.querySelector('.masked-input').style.transitionDuration = '0.2s'
-//     document.querySelector('.masked-input').style.border = '1px solid #FF0000'
-//   } else {
-//     store.number = '+7' + maskedValue.value
-//     document.querySelector('.masked-input').style.transitionDuration = '0.2s'
-//     document.querySelector('.masked-input').style.border = '1px solid #00FF26'
-//   }
-//     console.log(store.number)
-// }
 </script>
 
 <template>
@@ -159,6 +146,20 @@ function POSTrequest() {
                 draggable="false"
                 alt=""
             /></swiper-slide>
+            <swiper-slide
+              ><img
+                class="slider-image"
+                src="../../public/sliderImage5.png"
+                draggable="false"
+                alt=""
+            /></swiper-slide>
+            <swiper-slide
+              ><img
+                class="slider-image"
+                src="../../public/sliderImage4.png"
+                draggable="false"
+                alt=""
+            /></swiper-slide>
           </swiper>
           <div class="subBlock1">
             <h1>У нас вы сможете</h1>
@@ -203,10 +204,10 @@ function POSTrequest() {
               историю
             </h3>
           </div>
-          <img src="../../public/Guarantee.png" alt="" />
+          <img src="../../public/analytics.png" alt="" />
         </div>
         <div class="whatWeGuaranteeBlock">
-          <img src="../../public/Guarantee.png" alt="" />
+          <img src="../../public/insurance.png" alt="" />
           <div class="OurGuarantee">
             <h2>Экономия на страховании</h2>
             <h3>Являемся аккредитованными партнерами крупных страховых компаний</h3>
@@ -219,10 +220,10 @@ function POSTrequest() {
               От грамотной подачи, проверки недвижимости, подписания договора до получения ключей
             </h3>
           </div>
-          <img src="../../public/Guarantee.png" alt="" />
+          <img src="../../public/cat.png" alt="" />
         </div>
         <div class="whatWeGuaranteeBlock">
-          <img src="../../public/Guarantee.png" alt="" />
+          <img src="../../public/security.png" alt="" />
           <div class="OurGuarantee">
             <h2>Безопасность ваших персональных данных</h2>
             <h3>
@@ -241,33 +242,6 @@ function POSTrequest() {
             <span class="h1">а КомбоБрокер поможет вам в её достижении!</span>
           </h2>
           <button @click="open" class="standard-button"><p>Получить консультацию</p></button>
-        </div>
-      </div>
-    </div>
-    <div class="form-container">
-      <div class="form">
-        <h1 class="h1">Получить кредитный отчёт</h1>
-        <form action="">
-          <div class="input-container">
-            <input class="form-input" type="text" placeholder="ФИО" />
-            <input class="form-input" type="text" placeholder="Регион" />
-            <input class="form-input" type="text" placeholder="Серия и номер паспорта" />
-          </div>
-          <button>Узнать расшифровку кредитного отчёта</button>
-        </form>
-      </div>
-      <div class="stops">
-        <h2>Подскажем, есть ли у вас стоп-факторы</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. A in aliquet orci malesuada fusce risus tempus
-          lectus. Ultrices eu sit pellentesque nisl cras dolor.Lorem ipsum dolor sit amet
-          consectetur. A in aliquet orci malesuada fusce risus tempus lectus. Ultrices eu sit
-          pellentesque nisl cras dolor.
-        </p>
-        <div class="services">
-          <img class="service-icon" src="../../public/Service1_Icon.svg" alt="" />
-          <img class="service-icon" src="../../public/Service2_Icon.svg" alt="" />
-          <img class="service-icon" src="../../public/Service3_Icon.svg" alt="" />
         </div>
       </div>
     </div>
@@ -310,7 +284,10 @@ function POSTrequest() {
                     <h3>Семейная ипотека</h3>
                     <p>Ребёнок до 6 лет, или<br />Два несовершеннолетних ребёнка</p>
                   </div>
-                  <div class="programm-percent">от<p>6%</p></div>
+                  <div class="programm-percent">
+                    от
+                    <p>6%</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -324,7 +301,10 @@ function POSTrequest() {
                     <h3>Сельская ипотека</h3>
                     <p>Официальный доход<br />Стаж от трёх месяцев на текущем месте работы</p>
                   </div>
-                  <div class="programm-percent">от<p>3%</p></div>
+                  <div class="programm-percent">
+                    от
+                    <p>3%</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -338,7 +318,10 @@ function POSTrequest() {
                     <h3>IT ипотека</h3>
                     <p>Работникам it-компании<br />Стаж >= 2 года</p>
                   </div>
-                  <div class="programm-percent">от<p>6%</p></div>
+                  <div class="programm-percent">
+                    от
+                    <p>6%</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -352,7 +335,10 @@ function POSTrequest() {
                     <h3>Базовая ипотека</h3>
                     <p>Нет стоп-факторов</p>
                   </div>
-                  <div class="programm-percent">от<p>15%</p></div>
+                  <div class="programm-percent">
+                    от
+                    <p>15%</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -386,7 +372,7 @@ function POSTrequest() {
           </div>
           <div class="">
             <h3>Тема вопроса</h3>
-            <customSelect :options="['по кредиту', 'по ипотеке', 'почему', 'Другое']" />
+            <customSelect :options="['по кредиту', 'по ипотеке', 'по лечению кредитной истории', 'по бизнес кредитованию', 'по займу под залог недвижимости', 'другое']" />
           </div>
           <div class="container-number">
             <h3>Где вам удобнее общаться?</h3>
@@ -432,8 +418,8 @@ function POSTrequest() {
   p {
     color: #fff;
   }
-  img{
-    height:24px;
+  img {
+    height: 24px;
   }
 
   flex-direction: row;
@@ -472,10 +458,9 @@ function POSTrequest() {
   }
   height: 250px;
 }
-  footer {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-  
+footer {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 
   img {
     width: 30px;
@@ -607,7 +592,6 @@ function POSTrequest() {
   align-items: center;
   display: flex;
   flex-direction: row;
-
 }
 .programm-image-container {
   display: flex;
@@ -622,12 +606,11 @@ function POSTrequest() {
   box-shadow: 0 3px 7px 1px #458efc28;
   object-fit: cover;
   border-radius: 10px;
-
 }
 .block5 {
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .block5-container h1 {
   background: linear-gradient(90deg, #2b80ff 0%, #00a5e6 20%);
@@ -640,13 +623,13 @@ align-items: center;
   gap: 20px;
 }
 .programms__lgot {
-display: flex;
-flex-direction: column;
-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .programms {
-display: flex;
-gap: 20px
+  display: flex;
+  gap: 20px;
 }
 .programm {
   background-color: #fff;
@@ -662,7 +645,7 @@ gap: 20px
   justify-content: space-between;
   img {
     width: 10vw;
-    aspect-ratio: 1/1; 
+    aspect-ratio: 1/1;
     object-fit: contain;
   }
 }
@@ -698,7 +681,6 @@ gap: 20px
     }
   }
 }
-
 
 .block4 {
   display: flex;
@@ -765,7 +747,6 @@ gap: 20px
     width: 800px;
   }
   .form {
-
     button {
       width: 100%;
       height: 50px;
@@ -829,8 +810,6 @@ gap: 20px
   -webkit-text-fill-color: transparent;
 }
 
-
-
 .block2 {
   position: relative;
   display: flex;
@@ -845,7 +824,6 @@ gap: 20px
   align-items: center;
   background-color: #75a4eb;
   border-radius: 8px;
-
 }
 .subBlock1-container {
   h2 {
@@ -857,7 +835,7 @@ gap: 20px
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px
+  gap: 20px;
 }
 .subBlock1-container__canWithUs {
   display: flex;
@@ -877,7 +855,6 @@ gap: 20px
 .swiper-wrapper {
   display: flex;
   align-items: center;
-
 }
 
 .img {

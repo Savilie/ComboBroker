@@ -51,7 +51,7 @@ services:
     env_file:
       - .env
     # remove flag "--staging" to make real SSL (not for tests)
-    command: certonly --webroot --webroot-path=/var/www/html/ --agree-tos --emai>
+    command: certonly --webroot --webroot-path=/var/www/html/ --agree-tos --email ${CERTBOT_EMAIL} -d xn----7sbbuucbrjnm.xn--p1ai -d www.xn----7sbbuucbrjnm.xn--p1ai
     volumes:
       - etc-letsencrypt:/etc/letsencrypt
       - www-html:/var/www/html
