@@ -75,9 +75,8 @@ button::-moz-focus-inner {
 button {
   background-color: #5298ff;
 
-  height: 30px;
   border: 0;
-  padding-bottom: 35px;
+  padding-bottom: 5px;
   border-bottom: 2px solid #ffffff;
   text-align: left;
   font-size: 18px;
