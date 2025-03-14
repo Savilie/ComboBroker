@@ -85,14 +85,14 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'ComboBroker.urls'
 
 # CORS SETTINGS
-
+HOST = os.getenv('HOST')
 # development (NOT USE IN PROD)
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
-# CORS_ALLOWED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = [
 #    # real frontend host&port
-#    "http://frontend:5050"
-# ]
+    "https://" + HOST,
+]
 
 CORS_ALLOW_CREDENTIALS = True
 

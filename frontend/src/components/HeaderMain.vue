@@ -2,10 +2,6 @@
     <header>
         <div class="header-content">
             <h1 class="header-content__logo">КомбоБрокер</h1>
-            <nav>
-                <p>Консультация</p>
-                <p>Ипотечный Калькулятор</p>
-            </nav>
         </div>
 
     </header>
